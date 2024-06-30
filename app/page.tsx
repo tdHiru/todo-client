@@ -4,6 +4,7 @@ import { Todo } from "./components/Todo";
 import type { TodoType } from "./types/TodoType";
 import React, { useRef, useState } from "react";
 import { useTodos } from "@/hooks/useTodos";
+import { API_URL } from "@/constants/url";
 
 export default function Home() {
   const inputTodoRef = useRef<HTMLInputElement | null>(null);
@@ -13,7 +14,7 @@ export default function Home() {
       title: inputTodoRef.current?.value,
       isCompleted: false
     } 
-    const response = await fetch(`http://localhost:8080/createtodo`,{
+    const response = await fetch(`${API_URL}/createtodo`,{
       method: "POST",
       headers: { "Content-Type": "application/json"},
       body: JSON.stringify(reqBody)

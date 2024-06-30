@@ -1,6 +1,7 @@
 ﻿import React, { useState } from "react";
 import type { TodoType } from "../types/TodoType";
 import { useTodos } from "@/hooks/useTodos";
+import { API_URL } from "@/constants/url";
 
 type TodoProps = {
     todo: TodoType;
@@ -12,7 +13,7 @@ export const Todo = ({ todo }:TodoProps) => {
     const { todos, isLoading, error, mutate} = useTodos();
 
     const updateTodo = async(todoProperty:TodoType) => {
-        const response = await fetch("http://localhost:8080/updatetodo",{
+        const response = await fetch(`${API_URL}/updatetodo`,{
             method: "PUT",
             headers: {"Content-Type" : "application/json"},
             body: JSON.stringify(todoProperty)
@@ -48,7 +49,7 @@ export const Todo = ({ todo }:TodoProps) => {
             id: todo.id
         };
         const response = await fetch(
-            "http://localhost:8080/deletetodo",
+            `${API_URL}/deletetodo`,
             {
                 method:"DELETE",
                 headers:{ "Content-Type": "application/json" },
